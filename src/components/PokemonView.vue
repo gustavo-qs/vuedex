@@ -58,7 +58,7 @@
 <template>
   <div :class="`card ${pokedata.types[0]?.type.name}-gradient ${pokedata.types[1]?.type.name}-gradient`" :style="generateGradientClasses(pokedata.types[0]?.type.name, pokedata.types[1]?.type.name)">
     <p class="zoom text-center">{{ pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1) }}</p>
-    <img class="zoom" :src="`/src/assets/imgs/${img}.png`"><br>
+    <img class="zoom" :src="`/src/assets/imgs/${pokedata.id <= 9 ? `00${pokedata.id}` : pokedata.id <= 99 ? `0${pokedata.id}` : `${pokedata.id}`}.png`"><br>
     <div class="icons">
       <img v-if="pokedata.types[0]?.type.name" :class="`icon ${pokedata.types[0]?.type.name}`" :src="`/src/assets/icons/${pokedata.types[0].type.name}.svg`">
       <img v-if="pokedata.types[1]?.type.name" :class="`icon ${pokedata.types[1]?.type.name}`" :src="`/src/assets/icons/${pokedata.types[1].type.name}.svg`">
@@ -74,6 +74,7 @@
   align-items: center;
   border: 1px solid white;
   border-radius: 15px;
+  width: 100%;
 }
 
 .card:hover {

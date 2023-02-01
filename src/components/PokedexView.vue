@@ -1,20 +1,24 @@
 <script setup> 
-  import {ref} from 'vue';
+  import {ref, computed} from 'vue';
   import PokemonVue from './PokemonView.vue';
 
   const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151'),
         pokemons = ref(await response.json());
+  
+  var search = ref('');
+
+  var filteredPokemons = computed(() => Object.values(pokemons.value.results).filter(pkmn => pkmn.name.toLowerCase().includes(search.value.toLowerCase())));
 </script>
 
 <template>
   <div class="top">
     <img src="/src/assets/icons/search.png" alt="">
     <h1 class="text-center">VueDex</h1>
-    <input type="text" placeholder="Buscar Pokémon">
+    <input type="text" v-model="search" placeholder="Buscar Pokémon">
   </div>
   <div class="container">
-    <Suspense v-for="pkmn, index in pokemons.results" :key="pkmn">
-      <PokemonVue :pokemon="pkmn" :img="`${ index + 1 <= 9 ? `00${index + 1}` : index + 1 <= 99 ? `0${index + 1}` : `${index + 1}` }`"/>
+    <Suspense v-for="pkmn in filteredPokemons" :key="pkmn">
+      <PokemonVue :pokemon="pkmn"/>
     </Suspense>
   </div>
 </template>
