@@ -1,4 +1,5 @@
 # VueDex
+![image](https://user-images.githubusercontent.com/66074743/216323348-63836b2e-ced5-43c0-ba42-4dca991ea27d.png)
 
 ## Project Setup
 
@@ -10,16 +11,4 @@ npm install
 
 ```sh
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
